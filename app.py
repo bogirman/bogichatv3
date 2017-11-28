@@ -42,21 +42,17 @@ def handle_text_message(event):
     text = event.message.text #message from user
     textforanalyse = text
     #一般斷詞
-    tags = jieba.cut(text, cut_all=False)
-    num = 0
-    TextToUser = " "
-    for word in tags:
+    #tags = jieba.cut(text, cut_all=False)
+    #TextToUser = " "
+    #for word in tags:
         #if word is str:
-        TextToUser +=',' + word
-        num = num + 1
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text='分詞：'+TextToUser)) #reply the same message from user
+    #    TextToUser +=',' + word
+    #    num = num + 1
+    #line_bot_api.reply_message(
+    #    event.reply_token,
+    #    TextSendMessage(text='分詞：'+TextToUser)) #reply the same message from user
     #提取關鍵字
-    if num > 20:
-       tags = jieba.analyse.extract_tags(textforanalyse,10)
-    else:
-       tags = jieba.analyse.extract_tags(textforanalyse,5)
+    tags = jieba.analyse.extract_tags(textforanalyse,5)
     TextToUser = " "
     for word in tags:
         #if word is str:
