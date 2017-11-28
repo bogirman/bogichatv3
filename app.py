@@ -45,10 +45,10 @@ def handle_text_message(event):
     for word in tags:
         #if word is str:
         TextToUser += word
-    if text == '1234':
+    if text == '你好我好大家好，今天天氣好不好':
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=TextToUser)) #reply the same message from user
+            TextSendMessage(text=TextToUser+'GGGGG')) #reply the same message from user
     else:
         line_bot_api.reply_message(
             event.reply_token,
