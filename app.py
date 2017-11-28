@@ -38,13 +38,13 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
-    #jieba.set_dictionary('jieba/dict.txt.big')
+    jieba.set_dictionary('jieba/dict.txt.big')
     text = event.message.text #message from user
-    #tags = jieba.cut(text)
-    #TextToUser = " "
-    #for word in tags:
+    tags = jieba.cut(text)
+    TextToUser = " "
+    for word in tags:
         #if word is str:
-           #TextToUser += word
+        TextToUser += word
     if text is str:
         
         line_bot_api.reply_message(
