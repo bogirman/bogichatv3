@@ -39,10 +39,12 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
     text = event.message.text #message from user
-    text = jieba.cut(text)
+    tags = jieba.cut(text)
+    for word in tags:
+    TextToUser += ',' + word   
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=text)) #reply the same message from user
+        TextSendMessage(text=TextToUser)) #reply the same message from user
     
 
 import os
