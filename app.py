@@ -41,7 +41,7 @@ def handle_text_message(event):
     text = event.message.text #message from user
     tags = jieba.cut(text)
     for word in tags:
-    TextToUser += ',' + word   
+        TextToUser += ',' + word   
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=TextToUser)) #reply the same message from user
