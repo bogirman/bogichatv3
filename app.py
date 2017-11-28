@@ -40,14 +40,30 @@ def callback():
 def handle_text_message(event):
     jieba.set_dictionary('jieba/dict.txt.big')
     text = event.message.text #message from user
-    tags = jieba.cut(text)
+    textforanalyse = text
+    #一般斷詞
+    tags = jieba.cut(text, cut_all=False)
+    num = 0
+    TextToUser = " "
+    for word in tags:
+        #if word is str:
+        TextToUser +=',' + word
+        num = num + 1
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text='分詞：'+TextToUser)) #reply the same message from user
+    #提取關鍵字
+    if num > 20:
+       tags = jieba.analyse.extract_tags(textforanalyse,10)
+    else:
+       tags = jieba.analyse.extract_tags(textforanalyse,5)
     TextToUser = " "
     for word in tags:
         #if word is str:
         TextToUser +=',' + word
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=TextToUser)) #reply the same message from user
+        TextSendMessage(text='關鍵字提取：'+TextToUser)) #reply the same message from user
 
 import os
 if __name__ == "__main__":
